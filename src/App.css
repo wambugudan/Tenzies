@@ -1,0 +1,21 @@
+*{
+  box-sizing: border-box;
+}
+
+body{
+  margin: 0;
+  background-color: #0B2434;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.game-container{
+  margin: 15px 15px;
+  border-radius: 10px;
+  background-color: white;
+  height: 400px;
+  width: 530px;
+}
