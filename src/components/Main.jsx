@@ -33,9 +33,12 @@ export default function Main(){
         return newDice
     }
 
+
     // Creating a state to hold the array of random numbers
 
     const [dice, setDice] = useState(generateAllDice())
+
+    
 
     // Mapping on the new array to create the die component
 
@@ -45,7 +48,7 @@ export default function Main(){
 
     // Function to roll the dice and generate new num valus in the dice buttons
     const rollDice = function(){
-
+        setDice(generateAllDice())
     }
 
     return(
@@ -54,7 +57,7 @@ export default function Main(){
                 {/* Display the Dice elements */}
                 {diceElement}                   
             </div>
-            <button className="roll-dice" onClick={rollDice}>Roll Dice</button>
+            <button className="roll-dice" onClick={rollDice}>Roll</button>
         </div>
     )
 }
