@@ -1,6 +1,7 @@
 import { useState } from "react"
 import Die from "./Die"
 import { nanoid } from "nanoid"
+import Confetti from "react-confetti"
 
 export default function Main(){
 
@@ -43,8 +44,9 @@ export default function Main(){
     
 
     // Creating a state to hold the array of random numbers
+    // To ensure generateAllDice is not run on every roll, we use a call back function in the state initialization
 
-    const [dice, setDice] = useState(generateAllDice())
+    const [dice, setDice] = useState(() => generateAllDice())
 
     // Toggle the isHeld value
    
@@ -73,20 +75,26 @@ export default function Main(){
 
     // Function to roll the dice and generate new num valus in the dice buttons
     const rollDice = function(){
-        // setDice(generateAllDice())
-        setDice(prevState => prevState.map(btn =>
-            btn.isHeld ? 
-            btn : {...btn, value:Math.ceil(Math.random() * 6)}          
-
-        ))
+        // check if game is won to determine function roll
+        if (!gameWon) {
+            setDice(prevState => prevState.map(btn =>
+                btn.isHeld ? 
+                btn : {...btn, value:Math.ceil(Math.random() * 6)}          
+            ))    
+        }else{
+            setDice(generateAllDice())
+        }
     }
 
-    // gameWon var to check if game is won
-   
+
+
+    // Establish if game is won   
     const gameWon = dice.every(die => die.isHeld) && dice.every(die => die.value === dice[0].value)
 
-    return(
+    return(        
         <div className="game-container">
+            {/* Display confetti on game win */}
+            {gameWon && <Confetti />}
             <h1 className="title">Tenzies</h1>
             <p className="instructions">
                 Roll until all dice are the same. Click each die to freeze it 
@@ -96,7 +104,7 @@ export default function Main(){
                 {/* Display the Dice elements */}
                 {diceElement}                   
             </div>
-            <button className="roll-dice" onClick={rollDice}>
+            <button className="roll-dice" onClick={ rollDice }>
                 {gameWon ? "New Game" : "Roll"}
             </button>
         </div>
