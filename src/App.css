@@ -47,13 +47,14 @@ body{
   font: Inter, sans-serif;
 }
 
-button{
+button.roll-dice{
   margin-bottom: 20px;
   border-radius: 8px;
   height: 50px;
   width: 150px;
   font-size: 1.75rem;
   font-weight: bold;
-  background: blue;
-  /* color: white; */
+  background: #5035ff;
+  color: white;
+  cursor: pointer;
 }
