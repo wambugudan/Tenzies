@@ -1,16 +1,19 @@
 import PropTypes from 'prop-types'
 
-export default function Die(props){
-    
+export default function Die(props) {
+
     const buttonStyle = {
-        backgroundColor:props.isHeld ? "#59e391" : "white"
+        backgroundColor: props.isHeld ? "#59e391" : "white"
     }
 
-    return(
+    return (
         <>
-            <button 
-                onClick={() => props.hold(props.id)} 
+            <button
+                onClick={() => props.hold(props.id)}
                 style={buttonStyle}
+                aria-pressed={props.isHeld}
+                aria-label={`Die with value ${props.value}
+                ${props.isHeld ? "held" : "not held"}`}
             >
                 {props.value}
             </button>
